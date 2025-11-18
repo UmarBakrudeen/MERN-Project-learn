@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import moviesRouter from "./routes/movies.routes.js";
 import commentsRouter from "./routes/comments.routes.js";
 import connectDB from "./config/db.js";
+import cors from "cors";
 
 const app = express();
 
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Connect to database
 connectDB();
