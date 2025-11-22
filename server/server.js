@@ -2,8 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import moviesRouter from "./routes/movies.routes.js";
 import commentsRouter from "./routes/comments.routes.js";
+import usersRouter from "./routes/users.routes.js";
 import connectDB from "./config/db.js";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 const app = express();
 
@@ -15,6 +17,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(bodyParser.json());
 
 // Connect to database
 connectDB();
@@ -25,6 +28,7 @@ app.get("/", (req, res) => {
 
 app.use("/movies", moviesRouter);
 app.use("/comments", commentsRouter);
+app.use("/users", usersRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);

@@ -1,4 +1,5 @@
 import Movie from "../models/movie.model.js";
+import { getIndianTime } from "../utils/common.utils.js";
 
 export const getMovies = async (req, res) => {
   try {
@@ -33,6 +34,8 @@ export const createMovies = async (req, res) => {
   const newMovie = new Movie({
     title: req.body.title,
     desc: req.body.desc,
+    createdAt: getIndianTime(),
+    updatedAt: getIndianTime(),
   });
 
   try {
@@ -66,6 +69,7 @@ export const updateMovies = async (req, res) => {
 
     movie.title = title ?? movie.title;
     movie.desc = desc ?? movie.desc;
+    movie.updatedAt = getIndianTime();
 
     const updateMovie = await movie.save();
     res.json(updateMovie);
